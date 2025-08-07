@@ -15,8 +15,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -31,9 +33,15 @@ import com.example.learning.R
 @Composable
 fun InformBar() {
     val likes = remember { mutableStateOf(0) }
+    var Repos_Contacts by remember {
+        mutableStateOf(false)
+    }
     Card(modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .clickable{
+                Repos_Contacts = !Repos_Contacts
+        },
         shape = RoundedCornerShape(15.dp),
         elevation = CardDefaults.cardElevation(5.dp)
     ) {
@@ -47,6 +55,7 @@ fun InformBar() {
             Column(modifier = Modifier.offset(0.dp, 30.dp)) {
                 Text("Ремизов Кирилл Львович", fontFamily = FontFamily.SansSerif, fontSize = 17.sp, fontWeight = FontWeight.Bold )
                 Text("Kotlin developer and Ci/Cd engineer", fontFamily = FontFamily.SansSerif, fontSize = 12.sp, fontStyle = FontStyle.Italic)
+                Text("\nClick To Show Contact Information\n" + "Contacts: \n Telephone: 8-905-193-29-53 \n Gmail: kremizov3@gmail.com \n Telegram: https://t.me/BWoron \n VK: https://vk.com/bworon", maxLines = if(Repos_Contacts) 10 else 2, fontSize = 12.sp)
             }
             Box(modifier = Modifier.offset(0.dp, 17.dp)
                     .padding(10.dp)
